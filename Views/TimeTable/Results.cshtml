@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Generated Timetable</h2>
+
+<table border="1">
+  
+
+    @foreach (var row in (List<List<string>>)ViewBag.Timetable)
+    {
+        <tr>
+            @foreach (var subject in row)
+            {
+                <td>@subject</td>
+            }
+        </tr>
+    }
+</table>

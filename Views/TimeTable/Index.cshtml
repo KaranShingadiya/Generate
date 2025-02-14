@@ -1,0 +1,41 @@
+﻿@model List < Dyanamic_Time_Table_Generator.Models.TimeTable >
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Dynamic Time-Table Generator</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post">
+    <div>
+        <label>Working Days (1-7):</label>
+        <input type="number" name="workingDays" min="1" max="7" required />
+    </div>
+
+    <div>
+        <label>Subjects per Day (1-9):</label>
+        <input type="number" name="subjectsPerDay" min="1" max="9" required />
+    </div>
+
+    <h3>Enter Subject Hours</h3>
+    <div id="subjectInputs">
+        <input type="text" name="subjects[0].SubjectName" placeholder="Subject Name" required />
+        <input type="number" name="subjects[0].TotalHours" min="1" required />
+    </div>
+
+    <button type="button" onclick="addSubject()">Add Subject</button>
+    <button type="submit">Generate Timetable</button>
+</form>
+
+<script>let subjectIndex = 1;
+    function addSubject() {
+        let div = document.createElement('div');
+        div.innerHTML = `<input type="text" name="subjects[${subjectIndex}].SubjectName" placeholder="Subject Name" required />
+                         <input type="number" name="subjects[${subjectIndex}].TotalHours" min="1" required />`;
+        document.getElementById('subjectInputs').appendChild(div);
+        subjectIndex++;
+    }</script>
